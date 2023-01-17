@@ -47,13 +47,13 @@ const init = function () {
 
 const renderGallery = function (projet) {
   let html = `<figure>
-  <img src="${projet.imageUrl}" /><figcaption>${projet.title}</figcaption>
+  <img src="${projet.imageUrl}" crossorigin="anonymous" /><figcaption>${projet.title}</figcaption>
   </figure>`;
 
   if ((admin = 1)) {
     gallery.insertAdjacentHTML("beforeend", html);
     html = `<figure>
-    <img src="${projet.imageUrl}" data-id="${projet.id}"/><figcaption>éditer</figcaption>
+    <img src="${projet.imageUrl}" data-id="${projet.id}" crossorigin="anonymous"/><figcaption>éditer</figcaption>
     </figure>`;
     imgContainer.insertAdjacentHTML("beforeend", html);
 
