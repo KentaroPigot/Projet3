@@ -15,8 +15,8 @@
       crossorigin="anonymous"
     ></script>
     <meta name="description" content="" />
-    <link rel="stylesheet" href="./assets/style.css" />
-    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="src/assets/css/style.css" />
+    <script type="module" defer src="src/assets/js/controller.js"></script>
   </head>
   <body>
     <div class="edition-header admin">
@@ -30,15 +30,17 @@
         <ul>
           <li>projets</li>
           <li>contact</li>
-          <li><a href="login.html">login</a></li>
-          <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
+          <li><a href="./login.html">login</a></li>
+          <li>
+            <img src="src/assets/images/icons/instagram.png" alt="Instagram" />
+          </li>
         </ul>
       </nav>
     </header>
     <main>
       <section id="introduction">
         <figure>
-          <img src="./assets/images/sophie-bluel.png" alt="" />
+          <img src="src/assets/images/sophie-bluel.png" alt="" />
           <div class="admin modifier">
             <i class="fa-regular fa-pen-to-square"></i> <span>modifier</span>
           </div>
@@ -68,12 +70,10 @@
       <section id="portfolio">
         <h2>Mes Projets</h2>
         <div class="filters">
-          <button class="filter active" data-type="Tous">Tous</button>
-          <button class="filter" data-type="Objets">Objets</button>
-          <button class="filter" data-type="Appartements">Appartements</button>
-          <button class="filter" data-type="Hotels & restaurants">
-            Hôtels & Restaurants
-          </button>
+          <!-- <button class="filter active" data-id="0">Tous</button> -->
+          <!-- <button class="filter" data-id="1">Objets</button>
+          <button class="filter" data-id="2">Appartements</button>
+          <button class="filter" data-id="3">Hôtels & Restaurants</button> -->
         </div>
         <div class="gallery"></div>
       </section>
@@ -108,7 +108,7 @@
         aria-modal=""
       >
         <div class="modal-wrapper">
-          <a href="#" class="close-btn">
+          <a href="#" class="close-btn close-btn1">
             <i class="fa-solid fa-2x fa-xmark"></i
           ></a>
           <h2>Galerie photo</h2>
@@ -128,12 +128,10 @@
         <div class="modal-wrapper">
           <div id="modal2-btns">
             <i class="fa-solid fa-2x fa-arrow-left back-btn"></i>
-            <a href="#" class="close-btn">
-              <i class="fa-solid fa-2x fa-xmark"></i
-            ></a>
+            <i class="fa-solid fa-2x fa-xmark close-btn close-btn2"></i>
           </div>
           <h2>Ajout photo</h2>
-          <form class="modal2-form" action="" method="post">
+          <form id="modal2-form" method="post">
             <div class="add-pic-wrapper">
               <i class="fa-regular fa-4x fa-image img-exemple"></i>
               <img
@@ -146,7 +144,7 @@
                 >+ Ajouter photo</label
               >
               <input type="file" id="add-pic-btn" name="image" />
-              <p>jpg, png : 4mo max</p>
+              <p id="imageSizeText">jpg, png : 4mo max</p>
             </div>
 
             <label for="title">Nom</label>
@@ -161,7 +159,7 @@
             <!-- faire un select et customizer comme je peux-->
 
             <div class="understroke"></div>
-            <input type="button" value="Valider" id="valider" />
+            <input type="submit" id="valider" />
           </form>
         </div>
       </aside>
