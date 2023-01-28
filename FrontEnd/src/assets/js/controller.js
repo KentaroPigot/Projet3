@@ -1,5 +1,5 @@
 import * as model from './model.js';
-import worksView from './views/WorksView.js';
+import worksView from './views/worksView.js';
 import adminView from './views/adminView.js';
 import loginView from './views/loginView.js';
 import Modal1 from './views/modal1View.js';

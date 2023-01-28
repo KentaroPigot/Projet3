@@ -7,7 +7,7 @@ import {
 } from './helper.js';
 import Modal1 from './views/modal1View.js';
 import Modal2 from './views/modal2View.js';
-import WorksView from './views/WorksView.js';
+import WorksView from './views/worksView.js';
 
 export const state = {
   works: {},
