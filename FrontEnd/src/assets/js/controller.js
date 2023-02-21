@@ -4,10 +4,10 @@ import adminView from './views/adminView.js';
 import loginView from './views/loginView.js';
 import Modal1 from './views/modal1View.js';
 import Modal2 from './views/modal2View.js';
-
 import { checkEmail, checkPassword, getCategories } from './helper.js';
 
 console.log(`isAdmin = ${model.state.isAdmin}`);
+
 const controlWorks = async function () {
   try {
     // Loading Works
@@ -29,6 +29,7 @@ const controlFilters = async function () {
   try {
     //Filters rendering
     const res = await getCategories();
+    worksView.activeFilter();
     worksView.renderFilters(res);
 
     //Filters fonctionnality
@@ -66,25 +67,17 @@ const controlLogin = async function () {
   }
 };
 
-const controlModal1 = async function () {
+export const controlModal1 = async function () {
   await model.loadModal1();
   Modal1.render(model.state.works);
-  Modal1.deleteBtns.forEach(btn =>
-    btn.addEventListener('click', e => {
-      e.preventDefault();
-      model.deleteWork(e, btn);
-    })
-  );
+  Modal1.addDeleteFunctionnality();
   Modal1.overlay.addEventListener('click', e => Modal1.closeModal1(e));
 };
-
-console.log(Modal2.modal2Form);
 
 const controlModal2 = async function () {
   model.loadModal2();
   Modal2.renderDownloadFile();
   Modal2.modal2Form.addEventListener('submit', e => {
-    console.log('addEvent');
     e.preventDefault();
     e.stopPropagation();
   });
@@ -93,15 +86,23 @@ const controlModal2 = async function () {
     e.preventDefault();
   });
 
-  Modal2.sendWorkBtn.addEventListener('click', e => {
+  Modal2.sendWorkBtn.addEventListener('click', async e => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('click');
-    model.addWork(
+    const addingWork = await model.addWork(
       Modal2.addPicBtn.files[0],
       Modal2.addTitleInput.value,
       Modal2.categorieInput.value
     );
+    if (!addingWork) return;
+    await model.loadWorks();
+    Modal2.closeModal2();
+    worksView.render(model.state.works);
+    Modal1.render(model.state.works);
+    Modal1.addDeleteFunctionnality();
+    Modal2.cleanInputs();
+    Modal2.popupOn();
+    setTimeout(Modal2.popupOff.bind(Modal2), 5000);
   });
 };
 
@@ -122,9 +123,3 @@ if (window.location.pathname == '/FrontEnd/index.html') {
 loginView?.loginBtn?.addEventListener('click', function (e) {
   controlLogin.bind(e).call();
 }) ?? null;
-
-//Triche
-
-// window.onbeforeunload = function () {
-//   return 'Are you sure you want to reload the page?';
-// };

@@ -8,10 +8,6 @@ const timeout = function (s) {
 
 export const getData = async function () {
   try {
-    // const res = await Promise.race(
-    //   fetch('http://localhost:5678/api/works'),
-    //   timeout(30)
-    // );
     const res = await fetch('http://localhost:5678/api/works');
     const data = await res.json();
 
@@ -68,5 +64,6 @@ export const checkIfFormValid = function (files, title, categ) {
     console.log('input a categ');
     return false;
   }
+  console.log('Form valid !');
   return true;
 };

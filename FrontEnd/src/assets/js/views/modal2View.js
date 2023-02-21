@@ -20,6 +20,8 @@ class Modal2 {
   modal1 = document.querySelector('#modal1');
   overlay = document.querySelector('.overlay');
 
+  popup = document.querySelector('.work-send-popup');
+
   renderDownloadFile() {
     this.addPicBtn.addEventListener('change', () => {
       //Cache tout ce qui est dans le addPicWrapper
@@ -34,6 +36,28 @@ class Modal2 {
         this.imagePlaceholder.src = URL.createObjectURL(imgToDisplay);
       }
     });
+  }
+
+  emptyDownloadFile() {
+    const addImageContent = this.addPicWrapper.children;
+    [...addImageContent].forEach(content => content.classList.toggle('hidden'));
+
+    this.imagePlaceholder.src = '';
+  }
+
+  cleanInputs() {
+    this.emptyDownloadFile();
+    this.addPicBtn.value = '';
+    this.addTitleInput.value = '';
+    this.categorieInput.value = 1;
+  }
+
+  popupOn() {
+    this.popup.classList.toggle('hidden');
+  }
+
+  popupOff() {
+    this.popup.classList.toggle('hidden');
   }
 
   closeModal2() {

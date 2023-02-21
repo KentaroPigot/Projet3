@@ -4,7 +4,6 @@ class WorksView {
   filters = document.querySelector('.filters');
 
   render(data) {
-    console.log('renderingWorksView');
     this.#data = data;
     this.#clean();
     const markup = this.#data.map(prj => this.#generateMarkup(prj)).join('');
@@ -13,8 +12,21 @@ class WorksView {
 
   renderFilters(categories) {
     console.log('rendering');
+    this.filters.insertAdjacentHTML(
+      'beforeend',
+      `<button class="filter active" data-id="0">Tous</button>`
+    );
     const markup = categories.map(cat => this.#generateFilters(cat)).join('');
     this.filters.insertAdjacentHTML('beforeend', markup);
+  }
+
+  activeFilter() {
+    this.filters.addEventListener('click', e => {
+      this.filters
+        .querySelectorAll('.filter')
+        .forEach(flt => flt.classList.remove('active'));
+      e.target.classList.add('active');
+    });
   }
 
   #clean() {

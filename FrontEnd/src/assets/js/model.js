@@ -8,6 +8,7 @@ import {
 import Modal1 from './views/modal1View.js';
 import Modal2 from './views/modal2View.js';
 import WorksView from './views/worksView.js';
+import { controlModal1 } from './controller.js';
 
 export const state = {
   works: {},
@@ -80,17 +81,14 @@ export const loadModal1 = async function () {
     );
     const data = await getData();
     state.works = data;
-  } catch (err) {}
-
-  //generate modal1 (model.function())
-  //fetch images
-  //addEventListeners sur les boutons modifier
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const deleteWork = async function (e, element) {
   try {
-    console.log(e);
-    console.log(element);
+    console.log('Deleting work !');
     e.preventDefault();
     // getting img that has data-id
     const elm = element.closest('figure').querySelector('img');
@@ -111,9 +109,8 @@ export const deleteWork = async function (e, element) {
 
     console.log(`${elm.dataset.id} Deleted !`);
     await loadWorks();
-    console.log(state.works);
-    WorksView.render();
-    Modal1.render();
+    WorksView.render(state.works);
+    controlModal1();
   } catch (err) {
     console.log(err);
   }
@@ -135,12 +132,12 @@ export const loadModal2 = async function () {
 
 export const addWork = async function (files, title, categ) {
   try {
-    console.log('addWork');
+    console.log('Adding Work : ', files, title, categ);
+    console.log(state.token);
     // Il faut créer une verification des inputs avant d'envoyer le formulaire
     if (!checkIfFormValid(files, title, categ))
       throw new Error('Form non valid');
 
-    console.log('coool');
     const formData = new FormData();
     formData.append('image', files);
     formData.append('title', title);
@@ -154,10 +151,10 @@ export const addWork = async function (files, title, categ) {
       },
       body: formData,
     });
-    console.log(res);
-    // return false;
+    if (!res.ok) throw new Error(`Problem sending work (${res.status})`);
+    return true;
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 

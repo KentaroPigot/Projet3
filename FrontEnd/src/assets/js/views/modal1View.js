@@ -1,4 +1,5 @@
 // import { WorksView } from './WorksView';
+import { deleteWork } from '../model.js';
 
 class Modal1 {
   #parentEl = document.querySelector('.img-container');
@@ -16,8 +17,8 @@ class Modal1 {
   #data;
 
   render(data) {
-    console.log('renderingModal1');
     this.#data = data;
+    this.#clean();
     const markup = this.#data.map(prj => this.#generateMarkup(prj)).join('');
     this.#parentEl.insertAdjacentHTML('afterbegin', markup);
 
@@ -26,6 +27,10 @@ class Modal1 {
       .querySelectorAll('figure')
       .forEach(fig => this.createDeleteBtns(fig));
     this.deleteBtns = document.querySelectorAll('.delete');
+  }
+
+  #clean() {
+    this.#parentEl.innerHTML = '';
   }
 
   #generateMarkup(projet) {
@@ -40,6 +45,15 @@ class Modal1 {
     deleteBtn.classList.add('delete');
     deleteBtn.insertAdjacentHTML('afterbegin', markup);
     parent.append(deleteBtn);
+  }
+
+  addDeleteFunctionnality() {
+    this.deleteBtns.forEach(btn =>
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        deleteWork(e, btn);
+      })
+    );
   }
 
   openModal1() {

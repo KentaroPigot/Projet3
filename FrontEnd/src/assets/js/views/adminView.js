@@ -3,7 +3,6 @@ class adminView {
   filters = document.querySelector('.filters');
   renderAdminOptions() {
     this.#adminElements.forEach(el => (el.style.display = 'flex'));
-    // this.filters.classList.add('hidden');
   }
 }
 
