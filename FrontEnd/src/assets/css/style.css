@@ -696,3 +696,17 @@ figure .modifier:nth-child(2) {
     transform: translateY(-100%);
   }
 }
+
+select[id='categories'] {
+  margin-top: 15px;
+  width: 100%;
+  display: block;
+  padding: 1.5rem;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+input:focus,
+select:focus {
+  outline: none;
+}
