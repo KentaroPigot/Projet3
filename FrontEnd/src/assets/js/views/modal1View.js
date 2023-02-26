@@ -16,6 +16,12 @@ class Modal1 {
   overlay = document.querySelector('.overlay');
   #data;
 
+  deleteAllHandler(handler) {
+    this.deleteAllWorksBtn.addEventListener('click', () => {
+      handler(null, Array.from(this.deleteBtns));
+    });
+  }
+
   render(data) {
     this.#data = data;
     this.#clean();

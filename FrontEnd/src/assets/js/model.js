@@ -89,7 +89,7 @@ export const loadModal1 = async function () {
 export const deleteWork = async function (e, element) {
   try {
     console.log('Deleting work !');
-    e.preventDefault();
+    e?.preventDefault() ?? null;
     // getting img that has data-id
     const elm = element.closest('figure').querySelector('img');
     const deleteWork = await fetch(

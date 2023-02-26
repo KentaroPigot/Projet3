@@ -5,6 +5,7 @@ import loginView from './views/loginView.js';
 import Modal1 from './views/modal1View.js';
 import Modal2 from './views/modal2View.js';
 import { checkEmail, checkPassword, getCategories } from './helper.js';
+import modal1View from './views/modal1View.js';
 
 console.log(`isAdmin = ${model.state.isAdmin}`);
 
@@ -123,3 +124,12 @@ if (window.location.pathname == '/FrontEnd/index.html') {
 loginView?.loginBtn?.addEventListener('click', function (e) {
   controlLogin.bind(e).call();
 }) ?? null;
+
+const controlDeleteAll = function (e, works) {
+  console.log(works);
+  works.map(work => {
+    model.deleteWork(e, work);
+  });
+};
+
+modal1View.deleteAllHandler(controlDeleteAll);
